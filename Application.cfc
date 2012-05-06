@@ -33,7 +33,7 @@ component extends="frameworks.org.corfield.framework"
 		, automanagesession = false
 		, cfclocation = this.mappings[ "/model" ]
 		, eventhandling = true
-		, eventhandler = "model.aop.GlobalEventHandler"		
+		, eventhandler = "model.aop.Global#( server.coldfusion.productname == 'ColdFusion Server' ? '' : server.coldfusion.productname )#EventHandler"		
 	};
 	// create database and populate when the application starts in development environment
 	// you might want to comment out this code after the initial install
