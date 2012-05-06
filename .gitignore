@@ -1,3 +1,20 @@
 /*.project
 /*.xml
 /.settings/
+
+# IntelliJ IDEA project files
+*.iml
+.idea/
+
+# Tomcat instance
+/tomcat/
+
+# Railo WAR temporary/generated/configuration stuff
+/webroot/WEB-INF/
+
+# Symbolic link for MXUnit
+/webroot/mxunit
+
+# Miscellaneous
+robots.txt
+scribble.cfm
