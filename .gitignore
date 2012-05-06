@@ -1,3 +1,49 @@
 /*.project
 /*.xml
 /.settings/
+
+# IntelliJ IDEA project files
+*.iml
+.idea/
+
+# Tomcat instance
+/tomcat/
+
+# Railo WAR temporary/generated/configuration stuff
+/webroot/WEB-INF/lib/railo-server/context/exe-log
+/webroot/WEB-INF/lib/railo-server/context/id
+/webroot/WEB-INF/lib/railo-server/context/lib-hash
+/webroot/WEB-INF/lib/railo-server/context/railo-server.xml
+/webroot/WEB-INF/lib/railo-server/context/logs/
+/webroot/WEB-INF/lib/railo-server/context/scheduler/scheduler.xml
+/webroot/WEB-INF/lib/railo-server/context/search/search.xml
+/webroot/WEB-INF/lib/railo-server/context/security/cacerts
+/webroot/WEB-INF/lib/railo-server/context/temp/
+/webroot/WEB-INF/lib/railo-server/context/video/video.xml
+/webroot/WEB-INF/railo/exe-log
+/webroot/WEB-INF/railo/id
+/webroot/WEB-INF/railo/lib-hash
+/webroot/WEB-INF/railo/railo-web.xml.cfm
+/webroot/WEB-INF/railo/cache/
+/webroot/WEB-INF/railo/cfclasses/
+/webroot/WEB-INF/railo/logs/
+/webroot/WEB-INF/railo/output/
+/webroot/WEB-INF/railo/remote-client/open/
+/webroot/WEB-INF/railo/scheduler/scheduler.xml
+/webroot/WEB-INF/railo/search/search.xml
+/webroot/WEB-INF/railo/security/cacerts
+/webroot/WEB-INF/railo/temp/
+/webroot/WEB-INF/railo/video/video.xml
+# Railo addons/extensions
+/webroot/WEB-INF/railo/components/org/cfpoi/
+/webroot/WEB-INF/railo/extensions/90744C015F1643379D94B3E9C1558E0C/
+/webroot/WEB-INF/railo/lib/
+/webroot/WEB-INF/railo/library/
+/webroot/WEB-INF/railo/remote-client/
+
+# Symbolic link for MXUnit
+/webroot/mxunit
+
+# Miscellaneous
+robots.txt
+scribble.cfm
