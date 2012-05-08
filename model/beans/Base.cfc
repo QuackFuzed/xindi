@@ -1,7 +1,7 @@
 /*
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Bingham
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -20,7 +20,7 @@ component
 {
 	
 	// this method was sourced from https://gist.github.com/947636
-	void function populate( required struct memento, boolean trustedSetter=false, string include="", string exclude="", string disallowConversionToNull="" )
+	void function populate( required struct memento, boolean trustedSetter=false, string include="", string exclude="" )
 	{
 		var object = this;
 		var key = "";
@@ -34,15 +34,7 @@ component
 			{
 				if( StructKeyExists( object, "set" & key ) || arguments.trustedSetter )
 				{
-					if( IsSimpleValue( arguments.memento[ key ] ) && Trim( arguments.memento[ key ] ) == "" )
-					{
-						if( Len( arguments.disallowConversionToNull ) && !ListFindNoCase( arguments.disallowConversionToNull, key ) ) Evaluate( "object.set#key#(arguments.memento[key])" );
-						else Evaluate( 'object.set#key#(javacast("null",""))' );
-					}
-					else 
-					{
-						Evaluate( "object.set#key#(arguments.memento[key])" );
-					}
+					Evaluate( "object.set#key#(arguments.memento[key])" );
 				}
 			}
 		}

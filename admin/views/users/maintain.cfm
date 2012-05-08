@@ -1,7 +1,7 @@
 <!---
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Binghamme.uk/)
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -47,7 +47,7 @@
 
 			<div class="control-group">
 				<label class="control-label" for="password">Password <cfif rc.Validator.propertyIsRequired( "password", rc.context )>*</cfif></label>
-				<div class="controls"><input class="input-xlarge" type="password" name="password" id="password" value="#HtmlEditFormat( rc.User.getPassword() )#" maxlength="50"></div>
+				<div class="controls"><input class="input-xlarge" type="password" name="password" id="password" value="" maxlength="50"></div>
 			</div>			
 		</fieldset>
 		

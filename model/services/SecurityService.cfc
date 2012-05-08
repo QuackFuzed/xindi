@@ -1,7 +1,7 @@
 /*
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Bingham
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -62,7 +62,7 @@ component accessors="true"
 		var User = variables.UserService.newUser();
 		User.populate( arguments.properties );
 		var result = variables.Validator.validate( User, "login" );
-		User = variables.UserService.getUserByCredentials( arguments.properties );
+		User = variables.UserService.getUserByCredentials( User );
 		if( !IsNull( User ) )
 		{
 			setCurrentUser( User );

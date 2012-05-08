@@ -1,7 +1,7 @@
 <!---
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Bingham
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -26,7 +26,7 @@
 <cfhtmlhead text="#local.canonicalurl#">
 
 <cfoutput>
-	#view( "main/breadcrumbs", { Page=rc.Page, cachetimespan=application.config.caching.timespan } )#
+	#view( "main/breadcrumbs", { Page=rc.Page } )#
 	
 	<h1>#rc.Page.getTitle()#</h1>
 	

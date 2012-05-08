@@ -1,7 +1,7 @@
 <!---
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Bingham
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -16,52 +16,48 @@
 	IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --->
 
-<cfparam name="rc.cachetimespan" default="#CreateTimeSpan( 0, 0, 5, 0 )#">
-
 <!--- here's lots of code that renders an indented list of pages - could probably be improved! --->
 
 <cfset local.previouslevel = -1>
 
-<cfcache timespan="#rc.cachetimespan#">
-	<cfoutput>
-		<cfif ArrayLen( rc.navigation )>
-			<cfloop array="#rc.navigation#" index="local.Page">
-				<cfsavecontent variable="local.link">
-					<a href="#buildURL( local.Page.getSlug() )#">#local.Page.getNavigationTitle()#</a>
-				</cfsavecontent>		
-				
-				<cfif local.Page.getLevel() gt local.previouslevel>
-					<ul><li>
-						
-					#local.link#
-				<cfelseif local.Page.getLevel() lt local.previouslevel>
-					<cfset local.temporary = local.previouslevel>
-					
-					<cfloop condition="local.temporary gt local.Page.getLevel()">
-		 				</li></ul>
+<cfoutput>
+	<cfif ArrayLen( rc.navigation )>
+		<cfloop array="#rc.navigation#" index="local.Page">
+			<cfsavecontent variable="local.link">
+				<a href="#buildURL( local.Page.getSlug() )#">#local.Page.getNavigationTitle()#</a>
+			</cfsavecontent>		
 			
-						<cfset local.temporary = local.temporary - 1>
-					</cfloop>
+			<cfif local.Page.getLevel() gt local.previouslevel>
+				<ul><li>
+					
+				#local.link#
+			<cfelseif local.Page.getLevel() lt local.previouslevel>
+				<cfset local.temporary = local.previouslevel>
 				
-					</li><li>
+				<cfloop condition="local.temporary gt local.Page.getLevel()">
+	 				</li></ul>
 		
-					#local.link#
-				<cfelse>
-					</li><li>
-						
-					#local.link#
-				</cfif>
-				
-				<cfset local.previouslevel = local.Page.getLevel()>
-			</cfloop>
-		
-			<cfset local.temporary = local.Page.getLevel()>
-		
-			<cfloop condition="local.temporary ge 0">
-				</li></ul>
-				
-				<cfset local.temporary = local.temporary - 1>
-			</cfloop>
-		</cfif>
-	</cfoutput>
-</cfcache>
+					<cfset local.temporary = local.temporary - 1>
+				</cfloop>
+			
+				</li><li>
+	
+				#local.link#
+			<cfelse>
+				</li><li>
+					
+				#local.link#
+			</cfif>
+			
+			<cfset local.previouslevel = local.Page.getLevel()>
+		</cfloop>
+	
+		<cfset local.temporary = local.Page.getLevel()>
+	
+		<cfloop condition="local.temporary ge 0">
+			</li></ul>
+			
+			<cfset local.temporary = local.temporary - 1>
+		</cfloop>
+	</cfif>
+</cfoutput>

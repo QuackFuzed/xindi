@@ -1,4 +1,4 @@
-<!---
+/*
 	Xindi - http://www.getxindi.com/
 	
 	Copyright (c) 2012, Simon Bingham
@@ -14,45 +14,23 @@
 	OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
 	LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
 	IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
---->
+*/
 
-<cfset request.layout = false>
+component 
+{
+	this.applicationroot = ReReplace( getDirectoryFromPath( getCurrentTemplatePath() ), "tests.$", "", "all" );
 
-<cfoutput>
-	<!DOCTYPE html>
-	
-	<html lang="en">
-		<head>
-			<meta charset="utf-8">
-			
-			<title>Website Enquiry</title>
-		</head>
-
-		<body>
-			<p>Hello,</p>
-			
-			<p>Please find attached an enquiry from your website.</p>
-		
-			<table>
-				<tbody>
-					<tr>
-						<th style="text-align:left; vertical-align:top;">Name</th>
-						<td style="text-align:left; vertical-align:top;">#Enquiry.getFullName()#</td>
-					</tr>
-					<tr>
-						<th style="text-align:left; vertical-align:top;">Email Address</th>
-						<td style="text-align:left; vertical-align:top;"><a href="mailto:#Enquiry.getEmail()#">#Enquiry.getEmail()#</a></td>
-					</tr>
-					<tr>
-						<th style="text-align:left; vertical-align:top;">Message</th>
-						<td style="text-align:left; vertical-align:top;">#Enquiry.getDisplayMessage()#</td>
-					</tr>
-				</tbody>
-			</table>
-			
-			<p>Kind regards,</p>
-			
-			<p>Your Website</p>
-		</body>
-	</html>	
-</cfoutput>
+	this.name = ReReplace( "[^W]", this.applicationroot & "tests", "", "all" );
+	this.sessionmanagement = true;
+	this.mappings[ "/model" ] = this.applicationroot & "model/";
+	this.datasource = "xindi_testsuite";
+	this.ormenabled = true;
+	this.ormsettings = {
+		flushatrequestend = false
+		, automanagesession = false
+		, cfclocation = this.mappings[ "/model" ]
+		, eventhandling = true
+		, eventhandler = "model.aop.GlobalEventHandler"
+		, dbcreate = "update"		
+	};
+}

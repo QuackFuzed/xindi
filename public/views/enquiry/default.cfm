@@ -1,7 +1,7 @@
 <!---
-	Xindi (http://simonbingham.github.com/xindi/)
+	Xindi - http://www.getxindi.com/
 	
-	Copyright (c) 2012, Simon Bingham (http://www.simonbingham.me.uk/)
+	Copyright (c) 2012, Simon Bingham
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
 	files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -41,7 +41,7 @@
 			</div>
 		
 			<div class="control-group">
-				<label class="control-label" for="page-content">Message <cfif rc.Validator.propertyIsRequired( "message" )>*</cfif></label>
+				<label class="control-label" for="message">Message <cfif rc.Validator.propertyIsRequired( "message" )>*</cfif></label>
 				<div class="controls"><textarea class="input-xlarge ckeditor" name="message" id="message">#HtmlEditFormat( rc.Enquiry.getMessage() )#</textarea></div>
 			</div>
 		</fieldset>                        
