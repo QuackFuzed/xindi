@@ -1,5 +1,5 @@
 /*
-	Xindi - http://www.getxindi.com/ - Version 2012.5.8
+	Xindi - http://www.getxindi.com/ - Version 2012.5.11
 	
 	Copyright (c) 2012, Simon Bingham
 	
@@ -21,7 +21,7 @@ component extends="frameworks.org.corfield.framework"
 	/**
 	* application settings
 	*/
-	this.development = ListFind( "localhost,127.0.0.1", CGI.SERVER_NAME );
+	this.development = ListFind( "localhost,127.0.0.1,127.0.0.1:8888", CGI.SERVER_NAME ) != 0;
 	this.applicationroot = getDirectoryFromPath( getCurrentTemplatePath() );
 	this.sessionmanagement = true;
 	this.mappings[ "/model" ] = this.applicationroot & "model/";
@@ -70,12 +70,7 @@ component extends="frameworks.org.corfield.framework"
 		var ValidateThisConfig = { definitionPath="/model/" };
 		beanFactory.addBean( "Validator", new ValidateThis.ValidateThis( ValidateThisConfig ) );
 		beanFactory.addBean( "MetaData", new model.beans.MetaData() );
-		
-		// define revision identifier
-		application.revision = Hash( Now() );
-		
-		// get configuration
-		application.config = getConfig();
+		beanFactory.addBean( "config", getConfig() );
 	}
 	
 	/**
@@ -91,8 +86,8 @@ component extends="frameworks.org.corfield.framework"
 	  	// define default meta data
 		rc.MetaData = getBeanFactory().getBean( "MetaData" );
 		
-		// store revision identifier in request context
-		rc.revision = application.revision;
+		// store config in request context
+		rc.config = getBeanFactory().getBean( "Config" );
 		
 		// call admin on every request (used for security)
 		controller( "admin:main.default" );		 
@@ -133,9 +128,24 @@ component extends="frameworks.org.corfield.framework"
 	private struct function getConfig()
 	{
 		var config = {
-			enquirysettings = {
+			// if using caching in Railo you will need to add action="content" to the CFCACHE tags
+			// see http://wiki.getrailo.org/wiki/3-1-Tags:CFCache (including comments) for more information
+			
+			// if using caching in ColdFusion you may wish to add usecache="#rc.config.caching.enabled#"
+			// to the CFCACHE tags although it is not required
+			caching = {
+				enabled = false
+				, timespan = CreateTimeSpan( 0, 0, 5, 0 )
+			}
+			,enquirysettings = {
 				subject = "Enquiry"
 				, emailto = ""
+			}
+			, errorsettings = { 
+				enabled=true
+				, to=""
+				, from=""
+				, subject="Error Notification (#ListLast( this.applicationroot, '\/' )#)" 
 			}
 			, filemanagersettings = {
 				allowedextensions = "txt,gif,jpg,png,wav,mpeg3,pdf,zip"
@@ -145,19 +155,19 @@ component extends="frameworks.org.corfield.framework"
 				, rsstitle = ""
 				, rssdescription = ""
 			}
-			, errorsettings = { 
-				enabled=true
-				, to=""
-				, from=""
-				, subject="Error Notification (#ListLast( this.applicationroot, '\/' )#)" 
-			}
 			, pagesettings = { 
 				enableadddelete=true 
 			}
+			, revision = Hash( Now() ) // used to force latest versions of css and js files to load in browser
 			, securitysettings = {
 				whitelist = "^admin:security,^public:"
 			}
 		};
+		if( this.development || !config.caching.enabled )
+		{
+			config.caching.enabled = false;
+			config.caching.timespan = 0;
+		} 			
 		return config;
 	}	
 
